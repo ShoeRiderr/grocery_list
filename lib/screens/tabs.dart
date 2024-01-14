@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shopping_list/data/dummy_items.dart';
 import 'package:shopping_list/screens/groceries.dart';
 
 class TabsScreen extends ConsumerStatefulWidget {
@@ -17,9 +16,7 @@ class _TabsScreenState extends ConsumerState<TabsScreen> {
   Widget build(BuildContext context) {
     String activePageTitle = 'Your groceries';
 
-    Widget activePage = GroceriesScreen(
-      groceryList: groceryItems,
-    );
+    Widget activePage = const GroceriesScreen();
 
     return Scaffold(
       appBar: AppBar(

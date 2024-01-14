@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shopping_list/data/dummy_items.dart';
 import 'package:shopping_list/models/grocery_item.dart';
 
 class GroceryListItem extends StatelessWidget {
@@ -9,33 +10,27 @@ class GroceryListItem extends StatelessWidget {
 
   final GroceryItem groceryItem;
 
+  void _removeItem() {
+    groceryItems.remove(groceryItem);
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          children: [
-            Row(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(16),
-                  decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [
-                        groceryItem.category.color.withOpacity(0.95),
-                        groceryItem.category.color.withOpacity(0.55),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 20),
-                Text(groceryItem.name),
-                const Spacer(),
-                Text(groceryItem.quantity.toString()),
-              ],
-            ),
-          ],
+    return Dismissible(
+      onDismissed: (direction) {
+        _removeItem();
+      },
+      direction: DismissDirection.endToStart,
+      key: ValueKey(groceryItem.id),
+      child: ListTile(
+        title: Text(groceryItem.name),
+        leading: Container(
+          width: 24,
+          height: 24,
+          color: groceryItem.category.color,
+        ),
+        trailing: Text(
+          groceryItem.quantity.toString(),
         ),
       ),
     );
