@@ -6,19 +6,18 @@ class GroceryListItem extends StatelessWidget {
   const GroceryListItem({
     super.key,
     required this.groceryItem,
+    required this.removeGroceryItem,
   });
 
   final GroceryItem groceryItem;
 
-  void _removeItem() {
-    groceryItems.remove(groceryItem);
-  }
+  final void Function(GroceryItem item) removeGroceryItem; 
 
   @override
   Widget build(BuildContext context) {
     return Dismissible(
       onDismissed: (direction) {
-        _removeItem();
+        removeGroceryItem(groceryItem);
       },
       direction: DismissDirection.endToStart,
       key: ValueKey(groceryItem.id),
